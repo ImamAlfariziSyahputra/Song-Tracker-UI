@@ -1,11 +1,10 @@
 <template>
   <div class="border col-6 m-auto p-5 rounded">
-    <h1 class="text-center">Register</h1>
+    <h1 class="text-center">Login</h1>
     <!-- Email -->
     <b-form-group
       class="mb-3"
       label="Email address:"
-      autocomplete="off"
     >
       <b-form-input
         v-model="email"
@@ -33,7 +32,7 @@
       </span>
     </b-alert>
 
-    <b-button @click="register" block variant="primary">Register</b-button>
+    <b-button @click="login" block variant="primary">Login</b-button>
   </div>
 </template>
 
@@ -49,14 +48,14 @@ export default {
     };
   },
   methods: {
-    async register() {
+    async login() {
       let data = {
         email: this.email,
         password: this.password
       };
 
       try {
-        const response = await AuthService.register(data);
+        const response = await AuthService.login(data);
         console.log(response.data);
       } catch (err) {
         this.error = err.response.data.error;
