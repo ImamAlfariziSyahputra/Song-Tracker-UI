@@ -18,8 +18,8 @@
               <b-button size="sm" class="my-2 my-sm-0" type="submit">Search</b-button>
             </b-nav-form>
 
-            <b-navbar-nav v-if="!$store.state.isUserLoggedIn">
-              <b-nav-item>
+            <b-navbar-nav>
+              <b-nav-item v-if="!$store.state.isUserLoggedIn">
                 <router-link to="register" class="text-decoration-none text-white p-2">
                   SIGN UP
                 </router-link>
@@ -29,13 +29,13 @@
               </b-nav-item>
             </b-navbar-nav>
 
-            <b-nav-item-dropdown right>
+            <b-nav-item-dropdown right v-if="$store.state.isUserLoggedIn">
               <!-- Using 'button-content' slot -->
               <template #button-content>
                 <em>User</em>
               </template>
               <b-dropdown-item href="#">Profile</b-dropdown-item>
-              <b-dropdown-item href="#">Sign Out</b-dropdown-item>
+              <b-dropdown-item @click="logout">Sign Out</b-dropdown-item>
             </b-nav-item-dropdown>
           </b-navbar-nav>
         </b-collapse>
@@ -46,7 +46,16 @@
 
 <script>
 export default {
-  
+  methods: {
+    logout() {
+      this.$store.dispatch('setToken', null);
+      this.$store.dispatch('setUser', null);
+      // redirect to Auth Page
+      this.$router.push({
+        name: 'Home',
+      });
+    },
+  }
 }
 </script>
 
