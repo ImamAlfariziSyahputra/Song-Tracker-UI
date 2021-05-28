@@ -57,7 +57,8 @@ export default {
 
       try {
         const response = await AuthService.register(data);
-        console.log(response.data);
+        this.$store.dispatch('setToken', response.data.token);
+        this.$store.dispatch('setUser', response.data.user);
       } catch (err) {
         this.error = err.response.data.error;
       }

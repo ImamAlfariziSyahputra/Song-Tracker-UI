@@ -18,7 +18,7 @@
               <b-button size="sm" class="my-2 my-sm-0" type="submit">Search</b-button>
             </b-nav-form>
 
-            <b-navbar-nav>
+            <b-navbar-nav v-if="!$store.state.isUserLoggedIn">
               <b-nav-item>
                 <router-link to="register" class="text-decoration-none text-white p-2">
                   SIGN UP
