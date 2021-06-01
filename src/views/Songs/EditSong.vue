@@ -109,7 +109,7 @@
           </span>
         </b-alert>
 
-        <b-button @click="addSong" block variant="primary">Submit</b-button>
+        <b-button @click="EditSong" block variant="primary">Submit</b-button>
       </Panel>
     </div>
   </div>
@@ -118,7 +118,7 @@
 
 <script>
 import Panel from '@/components/Panel';
-import SongService from '@/services/SongsService';
+import SongsService from '@/services/SongsService';
 
 export default {
   components: {
@@ -139,13 +139,8 @@ export default {
       error: null,
     }
   },
-  // computed: {
-  //   validation() {
-  //     return this.song.title.length !== null;
-  //   }
-  // },
   methods: {
-    async addSong() {
+    async EditSong() {
       this.error = null;
       const areAllFieldsFilledIn = Object
         .keys(this.song)
@@ -155,14 +150,26 @@ export default {
         return;
       }
       try {
-        await SongService.store(this.song);
+        await SongsService.update(this.song);
+        const songId = this.$store.state.route.params.songId;
         this.$router.push({
-          name: 'Songs'
+          name: 'Song',
+          params: {
+            songId: songId,
+          }
         });
       } catch (err) {
         console.log(err);
       }
     },
+  },
+  async mounted() {
+    try {
+      const songId = this.$store.state.route.params.songId;
+      this.song = (await SongsService.show(songId)).data;
+    } catch (err) {
+      console.log(err);
+    }
   }
 }
 </script>

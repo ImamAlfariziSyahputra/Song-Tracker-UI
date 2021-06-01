@@ -2,14 +2,20 @@ import Vue from "vue";
 import App from "./App.vue";
 import router from "./router";
 import store from "./store";
-import { BootstrapVue, BootstrapVueIcons } from 'bootstrap-vue'
+import { sync } from 'vuex-router-sync';
+import { BootstrapVue, BootstrapVueIcons } from 'bootstrap-vue';
+import VueYoutube from 'vue-youtube';
 
-import 'bootstrap/dist/css/bootstrap.css'
-import 'bootstrap-vue/dist/bootstrap-vue.css'
+import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap-vue/dist/bootstrap-vue.css';
 
-Vue.use(BootstrapVue)
-Vue.use(BootstrapVueIcons)
+Vue.use(BootstrapVue);
+Vue.use(BootstrapVueIcons);
+Vue.use(VueYoutube)
+
 Vue.config.productionTip = false;
+
+sync(store, router);
 
 new Vue({
   router,
