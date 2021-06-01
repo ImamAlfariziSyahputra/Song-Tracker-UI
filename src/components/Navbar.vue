@@ -8,7 +8,9 @@
 
         <b-collapse id="nav-collapse" is-nav>
           <b-navbar-nav>
-            <b-nav-item href="#">Browse</b-nav-item>
+            <router-link to="/songs" class="text-decoration-none text-white p-2">
+              Browse
+            </router-link>
           </b-navbar-nav>
 
           <!-- Right aligned nav items -->
@@ -20,10 +22,10 @@
 
             <b-navbar-nav>
               <b-nav-item v-if="!$store.state.isUserLoggedIn">
-                <router-link to="register" class="text-decoration-none text-white p-2">
+                <router-link to="/register" class="text-decoration-none text-white p-2">
                   SIGN UP
                 </router-link>
-                <router-link to="login" class="text-decoration-none text-white p-2">
+                <router-link to="/login" class="text-decoration-none text-white p-2">
                   LOGIN
                 </router-link>
               </b-nav-item>

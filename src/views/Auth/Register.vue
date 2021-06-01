@@ -1,46 +1,54 @@
 <template>
-  <div class="border col-6 m-auto p-5 rounded">
-    <h1 class="text-center">Register</h1>
-    <!-- Email -->
-    <b-form-group
-      class="mb-3"
-      label="Email address:"
-      autocomplete="off"
-    >
-      <b-form-input
-        v-model="email"
-        type="email"
-        placeholder="Enter email"
-        required
-      ></b-form-input>
-    </b-form-group>
-    <!-- Password -->
-    <b-form-group
-      class="mb-3"
-      label="Email address:"
-    >
-      <b-form-input
-        v-model="password"
-        type="password"
-        placeholder="Enter password"
-        required
-      ></b-form-input>
-    </b-form-group>
+  <Panel title="Register" col="6" class="mx-auto">
+    <div class="m-3">
+      <!-- Email -->
+      <b-form-group
+        class="mb-3"
+        label="Email address:"
+        autocomplete="off"
+      >
+        <b-form-input
+          v-model="email"
+          type="email"
+          placeholder="Enter email"
+          required
+        ></b-form-input>
+      </b-form-group>
+      <!-- Password -->
+      <b-form-group
+        class="mb-3"
+        label="Password:"
+      >
+        <b-form-input
+          v-model="password"
+          type="password"
+          placeholder="Enter password"
+          required
+        ></b-form-input>
+      </b-form-group>
 
-    <b-alert v-if="error" show variant="danger">
-      <span v-html="error">
-        {{ error }}
-      </span>
-    </b-alert>
+      <b-alert v-if="error" show variant="danger">
+        <span v-html="error">
+          {{ error }}
+        </span>
+      </b-alert>
 
-    <b-button @click="register" block variant="primary">Register</b-button>
-  </div>
+      <div class="col-md-6 mx-auto">
+        <b-button @click="register" block variant="primary">Register</b-button>
+      </div>
+    </div>
+
+  </Panel>
 </template>
 
 <script>
 import AuthService from '@/services/AuthService';
+import Panel from '@/components/Panel';
 
 export default {
+  components: {
+    Panel,
+  },
   data() {
     return {
       email: '',
