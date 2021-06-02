@@ -32,14 +32,14 @@ const routes = [
     component: Songs,
   },
   {
-    path: "/songs/:songId",
-    name: "Song",
-    component: SongDetails,
-  },
-  {
     path: "/songs/create",
     name: "AddSong",
     component: AddSong,
+  },
+  {
+    path: "/songs/:songId",
+    name: "Song",
+    component: SongDetails,
   },
   {
     path: "/songs/:songId/edit",
