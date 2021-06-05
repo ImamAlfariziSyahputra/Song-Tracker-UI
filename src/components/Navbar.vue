@@ -2,8 +2,9 @@
   <div>
     <b-navbar class="mb-5" toggleable="lg" type="dark" variant="info">
       <!-- <div class="container"> -->
-        <b-navbar-brand href="#" class="mr-5">Song Tracker</b-navbar-brand>
-
+        <router-link to="/songs">
+          <b-navbar-brand class="mr-5">Song Tracker</b-navbar-brand>
+        </router-link>
         <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
         <b-collapse id="nav-collapse" is-nav>
@@ -54,7 +55,7 @@ export default {
       this.$store.dispatch('setUser', null);
       // redirect to Auth Page
       this.$router.push({
-        name: 'Home',
+        path: '/',
       });
     },
   }

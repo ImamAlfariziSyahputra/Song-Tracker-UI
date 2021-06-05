@@ -67,6 +67,7 @@ export default {
         const response = await AuthService.register(data);
         this.$store.dispatch('setToken', response.data.token);
         this.$store.dispatch('setUser', response.data.user);
+        this.$router.push({ name: 'Songs'});
       } catch (err) {
         this.error = err.response.data.error;
       }

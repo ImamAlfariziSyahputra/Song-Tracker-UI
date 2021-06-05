@@ -1,6 +1,5 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import Home from "../views/Home.vue";
 import Register from "../views/Auth/Register.vue";
 import Login from "../views/Auth/Login.vue";
 import Songs from "../views/Songs/Songs.vue";
@@ -11,11 +10,6 @@ import SongDetails from "../views/Songs/SongDetails/Index.vue";
 Vue.use(VueRouter);
 
 const routes = [
-  {
-    path: "/",
-    name: "Home",
-    component: Home,
-  },
   {
     path: "/register",
     name: "Register",
@@ -46,6 +40,10 @@ const routes = [
     name: "EditSong",
     component: EditSong,
   },
+  {
+    path: '*',
+    redirect: 'songs',
+  }
 ];
 
 // Handle Error NavigationDuplicated: Avoided redundant navigation to current location
