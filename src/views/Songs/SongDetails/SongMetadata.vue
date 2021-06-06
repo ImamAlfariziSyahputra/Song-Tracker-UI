@@ -13,7 +13,7 @@
           </div>
           <div class="col-6">
             <b-button 
-              v-if="isUserLoggedIn && !bookmark"
+              v-if="isUserLoggedIn && !bookmarks"
               variant="success"
               block size="sm"
               @click="setBookmark"
@@ -23,7 +23,7 @@
               Bookmark
             </b-button>
             <b-button 
-              v-if="isUserLoggedIn && bookmark"
+              v-if="isUserLoggedIn && bookmarks"
               variant="danger"
               block size="sm"
               @click="unBookmark"
@@ -51,7 +51,7 @@ export default {
   props: ['song'],
   data() {
     return {
-      bookmark: null,
+      bookmarks: null,
     }
   },
   components: {
@@ -66,18 +66,20 @@ export default {
   methods: {
     async setBookmark() {
       try {
-        this.bookmark = (await BookmarksService.store({
+        const bookmarks = 
+        (await BookmarksService.store({
           songId: this.song.id,
           userId: this.user.id,
         })).data;
+        this.bookmarks = bookmarks
       } catch (err) {
         console.log(err);
       }
     },
     async unBookmark() {
       try {
-        await BookmarksService.delete(this.bookmark.id);
-        this.bookmark = null
+        await BookmarksService.delete(this.bookmarks.id);
+        this.bookmarks = null;
       } catch (err) {
         console.log(err);
       }
@@ -88,10 +90,11 @@ export default {
       return;
     }
     try {
-      this.bookmark = (await BookmarksService.all({
+      const query = {
         songId: this.song.id,
         userId: this.user.id,
-      })).data;
+      }
+      this.bookmarks = (await BookmarksService.all(query)).data[0];
     } catch (err) {
       console.log(err);
     }

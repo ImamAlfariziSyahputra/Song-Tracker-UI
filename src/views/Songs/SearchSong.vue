@@ -1,5 +1,5 @@
 <template>
-  <Panel col="6" class="mx-auto">
+  <Panel title="Search" class="mx-auto">
     <b-form-input
       v-model="search"
       type="text"

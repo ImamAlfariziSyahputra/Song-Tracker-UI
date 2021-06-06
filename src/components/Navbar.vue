@@ -32,10 +32,10 @@
               </b-nav-item>
             </b-navbar-nav>
 
-            <b-nav-item-dropdown right v-if="$store.state.isUserLoggedIn">
+            <b-nav-item-dropdown right v-if="isUserLoggedIn">
               <!-- Using 'button-content' slot -->
               <template #button-content>
-                <em>User</em>
+                <em>{{ user.email }}</em>
               </template>
               <b-dropdown-item href="#">Profile</b-dropdown-item>
               <b-dropdown-item @click="logout">Sign Out</b-dropdown-item>
@@ -48,7 +48,15 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
+
 export default {
+  computed: {
+    ...mapState([
+      'isUserLoggedIn',
+      'user',
+    ])
+  },
   methods: {
     logout() {
       this.$store.dispatch('setToken', null);
