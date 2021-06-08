@@ -1,10 +1,10 @@
 <template>
-  <Panel title="Bookmarks">
+  <Panel title="Recently Viewed Songs" class="mt-4">
     <!-- {{ bookmarks }} -->
     <b-table
-      id="bookmarks-table"
+      id="song-history-table"
       :fields="fields"
-      :items="bookmarks"
+      :items="histories"
       :sort-by.sync="sortBy"
       :sort-desc.sync="sortDesc"
       :per-page="perPage"
@@ -34,13 +34,13 @@
       v-model="currentPage"
       :total-rows="rows"
       :per-page="perPage"
-      aria-controls="bookmarks-table"
+      aria-controls="song-history-table"
     ></b-pagination>
   </Panel>
 </template>
 
 <script>
-import BookmarksService from '@/services/BookmarksService';
+import SongHistoryService from '@/services/SongHistoryService';
 import Panel from '@/components/Panel';
 import { mapState } from 'vuex';
 
@@ -50,8 +50,8 @@ export default {
   },
   data() {
     return {
-      sortBy: 'createdAt',
       sortDesc: true,
+      sortBy: 'createdAt',
       perPage: 3,
       currentPage: 1,
       fields: [
@@ -59,15 +59,7 @@ export default {
         'title',
         'artist',
       ],
-      // items: [
-      //   { title: 'Selfish', artist: 'Stephanie Poetri' },
-      //   { title: 'IRL', artist: 'Stephanie Poetri' },
-      //   { title: 'I Love You 3000', artist: 'Stephanie Poetri' },
-      //   { title: 'I Love You 4000', artist: 'Stephanie Poetri' },
-      //   { title: 'I Love You 5000', artist: 'Stephanie Poetri' },
-      //   { title: 'I Love You 6000', artist: 'Stephanie Poetri' },
-      // ],
-      bookmarks: [],
+      histories: [],
     }
   },
   computed: {
@@ -76,12 +68,12 @@ export default {
       'user',
     ]),
     rows() {
-      return this.bookmarks.length;
+      return this.histories.length;
     }
   },
   async mounted() {
     if(this.isUserLoggedIn) {
-      this.bookmarks = (await BookmarksService.all({
+      this.histories = (await SongHistoryService.all({
         userId: this.user.id,
       })).data;
     }
@@ -90,7 +82,7 @@ export default {
 </script>
 
 <style>
-#bookmarks-table {
+#song-history-table {
   max-width: 10px;
 }
 </style>

@@ -18,6 +18,8 @@ import Youtube from '@/views/Songs/SongDetails/Youtube';
 import Tabs from '@/views/Songs/SongDetails/Tabs';
 import Lyrics from '@/views/Songs/SongDetails/Lyrics';
 import SongsService from '@/services/SongsService';
+import SongHistoryService from '@/services/SongHistoryService';
+import { mapState } from 'vuex';
 
 export default {
   components: {
@@ -31,9 +33,23 @@ export default {
       song: null,
     }
   },
+  computed: {
+    ...mapState([
+      'route',
+      'isUserLoggedIn',
+      'user',
+    ]),
+  },
   async mounted() {
-    const songId = this.$store.state.route.params.songId;
+    const songId = this.route.params.songId;
     this.song = (await SongsService.show(songId)).data;
+
+    if(this.isUserLoggedIn) {
+      SongHistoryService.store({
+        songId: songId,
+        userId: this.user.id,
+      })
+    }
   },
 }
 </script>

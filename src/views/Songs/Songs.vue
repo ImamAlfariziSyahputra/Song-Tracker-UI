@@ -2,6 +2,7 @@
   <div class="d-flex justify-content-between no-gutters px-3">
     <div class="col-6 mr-3">
       <SongsBookmarks />
+      <SongHistory />
     </div>
     <div class="col-6">
       <SearchSong />
@@ -31,6 +32,7 @@
 
 <script>
 import Panel from '@/components/Panel';
+import SongHistory from '@/views/Songs/SongHistory';
 import SongsBookmarks from '@/views/Songs/SongsBookmarks';
 import SearchSong from '@/views/Songs/SearchSong';
 import SongsService from '@/services/SongsService';
@@ -38,6 +40,7 @@ import SongsService from '@/services/SongsService';
 export default {
   components: {
     Panel,
+    SongHistory,
     SongsBookmarks,
     SearchSong,
   },
