@@ -47,7 +47,6 @@ export default {
     if(this.isUserLoggedIn) {
       SongHistoryService.store({
         songId: songId,
-        userId: this.user.id,
       })
     }
   },

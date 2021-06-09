@@ -1,10 +1,15 @@
 <template>
   <div class="d-flex justify-content-between no-gutters px-3">
-    <div class="col-6 mr-3">
+    <div class="col-6 mr-3" v-if="isUserLoggedIn">
       <SongsBookmarks />
       <SongHistory />
     </div>
-    <div class="col-6">
+    <div 
+      :class="{
+        'col-12': !isUserLoggedIn,
+        'col-6': isUserLoggedIn
+      }"
+    >
       <SearchSong />
       <Panel title="Songs">
         <router-link to="/songs/create" slot="action">
@@ -36,6 +41,7 @@ import SongHistory from '@/views/Songs/SongHistory';
 import SongsBookmarks from '@/views/Songs/SongsBookmarks';
 import SearchSong from '@/views/Songs/SearchSong';
 import SongsService from '@/services/SongsService';
+import { mapState } from 'vuex';
 
 export default {
   components: {
@@ -48,6 +54,11 @@ export default {
     return {
       songs: null,
     }
+  },
+  computed: {
+    ...mapState([
+      'isUserLoggedIn',
+    ])
   },
   watch: {
     '$route.query.search': {

@@ -69,7 +69,7 @@ export default {
         const bookmarks = 
         (await BookmarksService.store({
           songId: this.song.id,
-          userId: this.user.id,
+          // userId: this.user.id,
         })).data;
         this.bookmarks = bookmarks
       } catch (err) {
@@ -92,7 +92,7 @@ export default {
     try {
       const query = {
         songId: this.song.id,
-        userId: this.user.id,
+        // userId: this.user.id,
       }
       this.bookmarks = (await BookmarksService.all(query)).data[0];
     } catch (err) {
